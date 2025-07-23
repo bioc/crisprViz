@@ -98,7 +98,7 @@ plotMultipleGuideSets <- function(x,
     
     ## set tracks
     # genome <- lapply(guideSets, function(x){
-    #     unique(GenomeInfoDb::genome(x))
+    #     unique(Seqinfo::genome(x))
     # })
     # genome <- unique(unlist(genome))
     ideogramTrack <- .getIdeogramTrack(includeIdeogram=includeIdeogram,

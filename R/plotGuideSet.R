@@ -114,7 +114,7 @@ plotGuideSet <- function(x,
     })
     
     ## set tracks
-    # genome <- unique(GenomeInfoDb::genome(guideSet))
+    # genome <- unique(Seqinfo::genome(guideSet))
     ideogramTrack <- .getIdeogramTrack(includeIdeogram=includeIdeogram,
                                        chr=chr,
                                        # genome=genome,
@@ -258,7 +258,7 @@ plotGuideSet <- function(x,
 #' @importFrom BiocGenerics start end strand
 #' @importFrom IRanges restrict
 #' @importClassesFrom GenomicRanges GRanges
-#' @importFrom GenomeInfoDb seqnames seqinfo seqlengths
+#' @importFrom Seqinfo seqnames seqinfo seqlengths
 #' @importClassesFrom IRanges IRanges
 #' @importFrom IRanges IRanges
 #' @importFrom txdbmaker makeTxDb
@@ -325,7 +325,7 @@ plotGuideSet <- function(x,
             exon_rank <- max(currentRanks) + 1
         }
         GenomicRanges::GRanges(
-            seqnames=unique(GenomeInfoDb::seqnames(transcripts)),
+            seqnames=unique(Seqinfo::seqnames(transcripts)),
             ranges=IRanges::IRanges(start=from-extendDistance, width=1),
             strand=strand,
             tx_id=x,
@@ -356,7 +356,7 @@ plotGuideSet <- function(x,
             exon_rank <- min(currentRanks) - 1
         }
         GenomicRanges::GRanges(
-            seqnames=unique(GenomeInfoDb::seqnames(transcripts)),
+            seqnames=unique(Seqinfo::seqnames(transcripts)),
             ranges=IRanges::IRanges(start=to+extendDistance, width=1),
             strand=strand,
             tx_id=x,
@@ -393,10 +393,10 @@ plotGuideSet <- function(x,
                                     BiocGenerics::start(transcripts[tx_index]))
     }
     
-    chrominfo <- GenomeInfoDb::seqinfo(geneModel[["transcripts"]])
+    chrominfo <- Seqinfo::seqinfo(geneModel[["transcripts"]])
     chrominfo <- data.frame(
-        chrom=GenomeInfoDb::seqnames(chrominfo),
-        length=GenomeInfoDb::seqlengths(chrominfo)
+        chrom=Seqinfo::seqnames(chrominfo),
+        length=Seqinfo::seqlengths(chrominfo)
     )
     
     .id2Integer <- function(x){
@@ -644,7 +644,7 @@ plotGuideSet <- function(x,
 #' @importFrom methods as
 #' @importFrom S4Vectors mcols<-
 #' @importFrom BiocGenerics start end strand
-#' @importFrom GenomeInfoDb seqnames seqinfo seqlengths
+#' @importFrom Seqinfo seqnames seqinfo seqlengths
 #' @importFrom txdbmaker makeTxDb
 .extractGuideRanges <- function(guideSet,
                                 guideStacking
@@ -667,7 +667,7 @@ plotGuideSet <- function(x,
     
     tx <- data.frame(
         tx_id=transcripts$tx_id,
-        tx_chrom=as.character(GenomeInfoDb::seqnames(transcripts)),
+        tx_chrom=as.character(Seqinfo::seqnames(transcripts)),
         tx_strand=as.character(BiocGenerics::strand(transcripts)),
         tx_start=as.integer(BiocGenerics::start(transcripts)),
         tx_end=as.integer(BiocGenerics::end(transcripts)),
@@ -682,9 +682,9 @@ plotGuideSet <- function(x,
         exon_end=as.integer(BiocGenerics::end(transcripts)),
         cds_start=transcripts$cds_start,
         cds_end=transcripts$cds_end)
-    chrominfo <- GenomeInfoDb::seqinfo(guideSet)
-    chrominfo <- data.frame(chrom=GenomeInfoDb::seqnames(chrominfo),
-                            length=GenomeInfoDb::seqlengths(chrominfo))
+    chrominfo <- Seqinfo::seqinfo(guideSet)
+    chrominfo <- data.frame(chrom=Seqinfo::seqnames(chrominfo),
+                            length=Seqinfo::seqlengths(chrominfo))
     if (is.na(guideStacking)){
         txdb <- lapply(seq_len(nrow(tx)), function(x){
             suppressWarnings(

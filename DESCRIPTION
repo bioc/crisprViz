@@ -1,6 +1,6 @@
 Package: crisprViz
 Title: Visualization Functions for CRISPR gRNAs
-Version: 1.11.0
+Version: 1.11.1
 Authors@R: c(
     person("Jean-Philippe", "Fortin", email = "fortin946@gmail.com", role = c("aut", "cre")),
     person("Luke", "Hoberecht", email = "lukehob3@gmail.com", role = c("aut"))
@@ -16,7 +16,7 @@ Imports:
     BiocGenerics,
     Biostrings,
     BSgenome,
-    GenomeInfoDb,
+    Seqinfo,
     GenomicFeatures,
     GenomicRanges,
     grDevices,

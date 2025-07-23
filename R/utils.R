@@ -27,10 +27,10 @@
 }
 
 
-#' @importFrom GenomeInfoDb seqnames
+#' @importFrom Seqinfo seqnames
 .validateSingleChr <- function(obj
 ){
-    chr <- GenomeInfoDb::seqnames(obj)
+    chr <- Seqinfo::seqnames(obj)
     chr <- as.character(unique(chr))
     stopifnot("Only GuideSets targeting a single chromosome may be plotted."={
         length(chr) == 1
@@ -40,7 +40,7 @@
 
 
 
-#' @importFrom GenomeInfoDb seqnames
+#' @importFrom Seqinfo seqnames
 .validateSingleChrList <- function(obj
 ){
     eMessage <- "All GuideSets must target the same chromosome."
@@ -48,7 +48,7 @@
         stop(eMessage)
     }
     chrs <- vapply(obj, function(x){
-        chr <- GenomeInfoDb::seqnames(x)
+        chr <- Seqinfo::seqnames(x)
         as.character(unique(chr))
     }, FUN.VALUE=character(1))
     chr <- unique(chrs)
